@@ -39,4 +39,4 @@ Sitio desarrollado con HTML, CSS y JavaScript, sin frameworks — código entreg
 ---
 
 **Autor:** Leonardo García — Diseñador UX/UI Jr. & Front-End Developer
-📧 portafoliodeleo@gmail.com
+📧 leogar.ux.ui@gmail.com
