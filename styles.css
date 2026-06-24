@@ -25,14 +25,13 @@ body {
     position: sticky;
     top: 0;
     padding-top: 20px;
-
 }
 
 header {
     display: flex;
-    justify-content: center; /* Centra el grupo completo */
-    align-items: center;     /* Centra verticalmente */
-    gap: 100px;               /* Espacio entre el logo y el menú */
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
     padding-bottom: 10px;
 }
 
@@ -78,29 +77,71 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
+    gap: 36px;
     list-style: none;
 }
 
 .menu a {
     text-decoration: none;
     color: var(--white);
-    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s;
+}
+
+.menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.7);
+    transition: width 0.3s ease;
 }
 
 .menu a:hover {
-    color: var(--black);
+    color: var(--white);
+    opacity: 0.85;
+}
+
+.menu a:hover::after {
+    width: 100%;
 }
 
 .btn-menu {
-    
-    background: var(--button);
-    padding: 6px 12px 6px 12px;
-    border-radius: 5px;
+    background: var(--white);
+    color: var(--primary);
+    border: 1px solid var(--white);
+    padding: 6px 16px;
+    border-radius: 2px;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .btn-menu:hover {
-    background-color: #ffffff;
+    background: #00057f;
+    color: var(--white);
+    border-color: #00057f;
+    opacity: 1;
+}
+
+.btn-menu::after {
+    display: none;
+}
+
+.menu a.btn-menu {
+    color: var(--primary);
+}
+
+.menu a.btn-menu:hover {
+    color: var(--white);
 }
 
 /* HERO */
@@ -190,12 +231,11 @@ header {
 
 /* SOBRE */
 
-.nombre {
-    font-weight: bold;
-}
-
-.description {
-    font-size: 25px;
+.sobre-text {
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    text-align: left;
 }
 
 .sobre-grid {
@@ -214,13 +254,13 @@ header {
 .card a {
     text-decoration: none;
     color: inherit;
-    
     align-items: center;
     gap: 10px;
     transition: 0.3s;
-    font-weight: bold;
-    font-size: 30px;
-    font-family: 'Pompiere', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    font-family: 'Lato', sans-serif;
+    letter-spacing: 0.3px;
 }
 
 .card a:hover {
@@ -264,16 +304,10 @@ header {
 }
 
 .lista-detalles {
-    list-style: none; /* Quita los puntos/balas de la lista */
+    list-style: none;
     padding: 0;
     margin: 15px 0;
-    text-align: center; /* Centra el texto */
-}
-
-.lista-detalles li {
-    margin-bottom: 8px; /* Espaciado entre cada punto */
-    font-size: 25px;
-    color: black; /* Ajusta según tu diseño */
+    text-align: center;
 }
 
 .paquetescontainer {
@@ -334,8 +368,8 @@ header {
     align-items: center;
     gap: 10px;
     transition: 0.3s;
-    font-weight: bold;
-    font-size: 26px;
+    font-weight: 400;
+    font-size: 1.1rem;
 }
 
 .contacto-info a:hover {
@@ -399,18 +433,46 @@ h1, h2, h3, .logo {
     letter-spacing: 1px;
 }
 
-/* Párrafos (lectura cómoda) */
+/* Párrafos descriptivos */
 p {
     font-family: 'Lato', sans-serif;
-    font-size: 1.9rem;
-    line-height: 1.6;
+    font-size: 1.45rem;
+    font-weight: 300;
+    line-height: 1.75;
     color: #000000;
+}
+
+/* Nombres de fotógrafos */
+.nombre {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Texto descriptivo de cada fotógrafo */
+.description {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.75;
+}
+
+/* Items de lista de paquetes */
+.lista-detalles li {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: black;
+    margin-bottom: 8px;
 }
 
 /* UI / botones / navegación */
 a, li, button, input, textarea {
     font-family: 'Lato', sans-serif;
-    font-size: 1.3rem;
+    font-weight: 300;
+    font-size: 1.05rem;
 }
 
 h1 {
@@ -433,6 +495,123 @@ h3 {
 
 .section {
     padding: 50px 40px;
+}
+
+/* HAMBURGER FLOTANTE */
+.hamburger-btn {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    z-index: 2000;
+    background: var(--primary);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 3px;
+    width: 42px;
+    height: 42px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.hamburger-btn span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--white);
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.hamburger-btn.open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+}
+.hamburger-btn.open span:nth-child(2) {
+    opacity: 0;
+}
+.hamburger-btn.open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* DRAWER */
+.nav-drawer {
+    position: fixed;
+    top: 0;
+    right: -280px;
+    width: 260px;
+    height: 100vh;
+    background: var(--primary);
+    z-index: 1900;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -4px 0 24px rgba(0,0,0,0.25);
+}
+
+.nav-drawer.open {
+    right: 0;
+}
+
+.nav-drawer a {
+    color: var(--white);
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding-bottom: 4px;
+    position: relative;
+}
+
+.nav-drawer a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.6);
+    transition: width 0.3s ease;
+}
+
+.nav-drawer a:hover::after {
+    width: 100%;
+}
+
+.nav-drawer .btn-drawer {
+    background: var(--white);
+    color: var(--primary);
+    border: 1px solid var(--white);
+    padding: 7px 20px;
+    border-radius: 2px;
+    font-weight: 600;
+    transition: background 0.3s, color 0.3s;
+}
+
+.nav-drawer .btn-drawer:hover {
+    background: #00057f;
+    color: var(--white);
+}
+
+.drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 1800;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s;
+}
+
+.drawer-overlay.open {
+    opacity: 1;
+    pointer-events: all;
 }
 
 /*WHATSAPP*/
@@ -461,7 +640,7 @@ h3 {
 
 .form-message {
     margin-top: 15px;
-    font-family: 'Pompiere', sans-serif;
+    font-family: 'Lato', sans-serif;
     align-content: center;
     font-size: 2rem;
     padding: 12px;
@@ -501,24 +680,8 @@ h3 {
 }
 
 @media (max-width: 667px) {
-    header {
-        flex-direction: column; /* Apila logo y menú uno sobre otro */
-        height: auto;
-        padding: 20px;
-    }
-
-    nav {
-        margin-top: 10px;
-        display: flex;
-        flex-wrap: wrap; /* Si son muchos links, que bajen a la siguiente línea */
-        justify-content: center;
-        gap: 30px;
-    }
-}
-
-@media (max-width: 667px) {
     .hero h1 {
-        font-size: 1rem; /* Reduce el tamaño de la letra en móvil */
+        font-size: 1rem;
     }
     
     .hero {
@@ -528,17 +691,15 @@ h3 {
     }
 }
 
+/* MÓVIL: ocultar header normal, mostrar solo hamburguesa */
 @media (max-width: 667px) {
     header {
-        display: flex;
-        flex-direction: column; /* Apila los elementos */
-        align-items: center;    /* Centra el logo y el menú horizontalmente */
-        text-align: center;
-        gap: 20px;
+        display: none !important;
     }
 
-    .menu {
-        justify-content: center; /* Asegura que los links estén centrados */
-        gap: 20px;
+    .hamburger-btn {
+        display: flex !important;
+        top: 14px;
+        right: 16px;
     }
 }
