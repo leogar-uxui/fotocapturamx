@@ -2,17 +2,32 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Fotocaptura.mx</title>
+    <title>FotoCaptura.Mx</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="logo.png" />
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Pompiere&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- HAMBURGER FLOTANTE -->
+<button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir menú">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<!-- DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<nav class="nav-drawer" id="navDrawer">
+    <a href="#inicio">Inicio</a>
+    <a href="#sobre">Sobre Nosotros</a>
+    <a href="#especialidades">Especialidades</a>
+    <a href="#paquetes">Paquetes</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#contacto" class="btn-drawer">Agendar Sesión</a>
+</nav>
 
 <!-- HEADER -->
 <header class="header">
@@ -319,21 +334,56 @@ form.addEventListener("submit", async function(e) {
 <script>
   let lastScrollTop = 0;
   const header = document.querySelector("header");
+  const hamburgerBtn = document.getElementById("hamburgerBtn");
+  const navDrawer = document.getElementById("navDrawer");
+  const drawerOverlay = document.getElementById("drawerOverlay");
 
+  const isMobile = () => window.innerWidth <= 667;
+
+  // Mostrar/ocultar header y hamburguesa al scroll (solo desktop)
   window.addEventListener("scroll", function() {
+    if (isMobile()) return; // En móvil el hamburger siempre está visible
+
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    if (scrollTop > lastScrollTop) {
-      // Si bajas: oculta el header
+    if (scrollTop > lastScrollTop && scrollTop > 80) {
       header.classList.add("header-hidden");
+      hamburgerBtn.style.display = "flex";
     } else {
-      // Si subes: muestra el header
       header.classList.remove("header-hidden");
+      hamburgerBtn.style.display = "none";
+      closeDrawer();
     }
-    
-    // Evita que el scroll sea negativo (pasa en algunos navegadores)
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; 
+
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
   }, false);
+
+  // Toggle drawer
+  function openDrawer() {
+    navDrawer.classList.add("open");
+    drawerOverlay.classList.add("open");
+    hamburgerBtn.classList.add("open");
+  }
+
+  function closeDrawer() {
+    navDrawer.classList.remove("open");
+    drawerOverlay.classList.remove("open");
+    hamburgerBtn.classList.remove("open");
+  }
+
+  hamburgerBtn.addEventListener("click", function() {
+    if (navDrawer.classList.contains("open")) {
+      closeDrawer();
+    } else {
+      openDrawer();
+    }
+  });
+
+  drawerOverlay.addEventListener("click", closeDrawer);
+
+  navDrawer.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", closeDrawer);
+  });
 </script>
 
 
