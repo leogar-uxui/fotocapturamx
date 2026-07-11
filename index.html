@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="logo.png" />
+<title>Fotocaptura.mx</title>
+<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HAMBURGER -->
+<button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<nav class="nav-drawer" id="navDrawer">
+  <a href="#sobre">Sobre Nosotros</a>
+  <a href="#especialidades">Especialidades</a>
+  <a href="#paquetes">Paquetes</a>
+  <a href="#agendar">Agendar</a>
+  <a href="#galeria">Mi galería</a>
+  <a href="#contacto" class="btn-drawer">Contacto</a>
+</nav>
+
+<!-- HEADER -->
+<header>
+  <div class="nav-container">
+    <a href="#" class="logo-link">
+      <img src="images/logo.png" alt="FotoCaptura.Mx">
+    </a>
+    <ul class="menu">
+      <li><a href="#sobre">Sobre Nosotros</a></li>
+      <li><a href="#especialidades">Especialidades</a></li>
+      <li><a href="#paquetes">Paquetes</a></li>
+      <li><a href="#agendar">Agendar</a></li>
+      <li><a href="#galeria">Mi Galería</a></li>
+      <li><a href="#contacto" class="btn-menu">Contacto</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Creando imágenes que guardan una historia</h1>
+  <p>Fotografía profesional para eventos, retratos y más</p>
+  <a href="#agendar" class="btn-primary">Agendar sesión</a>
+  <a href="#galeria" class="btn-outline">Ver mi galería</a>
+</section>
+
+<!-- SOBRE NOSOTROS -->
+<section id="sobre" class="section">
+  <h2 class="section-title">Sobre Nosotros</h2>
+  <p class="section-sub">El equipo detrás de cada sesión.</p>
+  <div class="team-duo">
+    <div class="team-card">
+      <div class="team-card-photo"><img src="images/alexandra.jpg" alt="Alexandra"></div>
+      <div class="team-card-body">
+        <h3>Alexandra</h3>
+        <p>Buscando la perfección en el retrato artístico. Experta en la estética visual, siempre atenta a los detalles.</p>
+      </div>
+      <a href="https://www.instagram.com/alexandragomezph" target="_blank" class="member-ig"><i class="fa-brands fa-instagram"></i> @alexandragomezph</a>
+    </div>
+    <div class="team-card">
+      <div class="team-card-photo"><img src="images/leonardo.jpg" alt="Leonardo"></div>
+      <div class="team-card-body">
+        <h3>Leonardo</h3>
+        <p>Especialista en el instante perfecto. Enfoque centrado en la velocidad y la precisión que nadie más nota.</p>
+      </div>
+      <a href="https://www.instagram.com/leogar.20" target="_blank" class="member-ig"><i class="fa-brands fa-instagram"></i> @leogar.20</a>
+    </div>
+  </div>
+  <p class="about-lead">En <strong>Fotocaptura.mx</strong> fusionamos la precisión del producto, la sensibilidad del retrato artístico y la emoción de los eventos sociales. Con una década de experiencia, transformamos bodas, XV años y marcas en legados visuales a través de una atención impecable al detalle. Permítenos acompañarte en tus momentos más importantes y convertir tus historias en recuerdos inolvidables.</p>
+</section>
+
+<!-- ESPECIALIDADES -->
+<section id="especialidades" class="section alt">
+  <h2 class="section-title">En Qué Nos Especializamos</h2>
+  <p class="section-sub">Una muestra de nuestro trabajo. Usa las flechas para explorar cada categoría.</p>
+  <div id="carouselsContainer"></div>
+</section>
+
+<!-- PAQUETES -->
+<section id="paquetes" class="section">
+  <h2 class="section-title">Paquetes Favoritos</h2>
+  <p class="section-sub">Boda, XV años y sesión individual son los más solicitados. Todos incluyen edición profesional.</p>
+
+  <div class="featured-grid" id="featuredGrid"></div>
+
+  <button class="toggle-more" id="toggleMoreBtn">Ver más paquetes ▾</button>
+  <div class="more-packages" id="morePackages"></div>
+
+  <p class="disclaimer">* Los precios son "desde" y pueden variar según locación, duración, temporada y personalización de cada sesión. La cotización final se confirma contigo antes de agendar.</p>
+</section>
+
+<!-- AGENDAR -->
+<section id="agendar" class="section alt">
+  <h2 class="section-title">Reserva tu sesión</h2>
+  <p class="section-sub">Completa el formulario y te confirmo por WhatsApp o correo la fecha y hora. Al agendar recibes un código único para tu galería privada.</p>
+  <div class="container">
+    <div class="booking-panel">
+      <div class="booking-info">
+        <h3>Cómo funciona</h3>
+        <div class="step"><div class="step-num">1</div><p>Eliges paquete, fecha tentativa y me cuentas qué necesitas.</p></div>
+        <div class="step"><div class="step-num">2</div><p>Te confirmo disponibilidad y detalles por WhatsApp o correo.</p></div>
+        <div class="step"><div class="step-num">3</div><p>Al agendar recibes un código único (ej. FC-8K2M) — es tu llave a tu galería privada.</p></div>
+        <div class="step"><div class="step-num">4</div><p>Cuando la sesión esté editada, tu galería aparece disponible con ese mismo código.</p></div>
+      </div>
+      <form class="app-form" id="bookingForm">
+        <div class="field">
+          <label for="bName">Nombre completo</label>
+          <input type="text" id="bName" required placeholder="Tu nombre">
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="bEmail">Correo</label>
+            <input type="email" id="bEmail" required placeholder="tucorreo@ejemplo.com">
+          </div>
+          <div class="field">
+            <label for="bPhone">Teléfono / WhatsApp</label>
+            <input type="tel" id="bPhone" required placeholder="55 0000 0000">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="bPackage">Paquete</label>
+            <select id="bPackage" required></select>
+          </div>
+          <div class="field">
+            <label for="bDate">Fecha deseada</label>
+            <input type="date" id="bDate" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="bNotes">Cuéntame de tu sesión</label>
+          <textarea id="bNotes" placeholder="Locación, referencias, número de personas, etc."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Confirmar solicitud</button>
+        <div class="form-message" id="bookingMsg"></div>
+        <div class="code-reveal" id="codeReveal">
+          <div class="label">Tu código de galería</div>
+          <div class="code" id="revealedCode">FC-0000</div>
+          <div class="hint">Guarda este código — lo necesitarás en "Mi galería" cuando tu sesión esté lista.</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria" class="section">
+  <h2 class="section-title">Mi Galería</h2>
+  <p class="section-sub">Solo la persona que agendó la sesión puede ver estas fotos. Ingresa el código que recibiste al confirmar tu reserva.</p>
+  <div class="gallery-access">
+    <h3>Ver mi galería privada</h3>
+    <p>Introduce tu código, formato FC-XXXXXX</p>
+    <div class="code-input-row">
+      <input type="text" id="galleryCodeInput" maxlength="10" placeholder="FC-8K2MC5">
+      <button class="btn-primary" id="galleryAccessBtn" style="border:none; cursor:pointer;">Ver galería</button>
+    </div>
+    <div class="gallery-result" id="galleryResult"></div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="section alt">
+  <h2 class="section-title">Contacto</h2>
+  <div class="container contacto-grid">
+    <div class="contacto-info">
+      <p><a href="https://instagram.com/fotocaptura.mx" target="_blank"><i class="fa-brands fa-instagram"></i> @fotocaptura.mx</a></p>
+      <p><a href="https://wa.me/525561933683?text=Hola%20quiero%20información%20sobre%20una%20sesión" target="_blank"><i class="fa-brands fa-whatsapp"></i> +52 55 6193 3683</a></p>
+      <p><a href="mailto:fotocapturamx@gmail.com"><i class="fa-solid fa-envelope"></i> fotocapturamx@gmail.com</a></p>
+    </div>
+    <form class="contact-form" id="contactForm">
+      <input type="text" id="cName" required placeholder="Nombre">
+      <input type="email" id="cEmail" required placeholder="Correo">
+      <textarea id="cMsg" required placeholder="Mensaje"></textarea>
+      <button type="submit">ENVIAR</button>
+      <div class="form-message" id="contactMsg"></div>
+    </form>
+  </div>
+</section>
+
+<a href="https://wa.me/525561933683?text=Hola%20quiero%20información%20sobre%20una%20sesión" target="_blank" class="whatsapp-float">
+  <span class="tooltip">Contáctanos</span>
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<footer>
+  <p>© 2026 Fotocaptura.mx</p>
+  <!--<button class="admin-link" id="openAdmin">Panel de administración</button>-->
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="close" id="closeLightbox">✕</button>
+  <img id="lightboxImg" src="" alt="Foto de galería">
+</div>
+
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-box">
+    <button class="close-admin" id="closeAdmin">✕</button>
+    <h3>Panel de administración</h3>
+    <p style="color:var(--ink-dim); font-size:.9rem; margin-bottom:24px; font-weight:300;">
+      Reservas, mensajes y fotos se administran directamente desde tu proyecto de Supabase — es más seguro que una contraseña dentro de la página.
+    </p>
+    <div class="admin-guide-card">
+      <h4><i class="fa-solid fa-table"></i> Ver reservas y mensajes</h4>
+      <p>Entra a tu proyecto en <strong>supabase.com/dashboard</strong> → <strong>Table Editor</strong> → tablas <code>bookings</code> y <code>contacts</code>.</p>
+    </div>
+    <div class="admin-guide-card">
+      <h4><i class="fa-solid fa-images"></i> Subir fotos de una sesión</h4>
+      <p>Ve a <strong>Storage</strong> → bucket <code>client-photos</code> → crea una carpeta con el código del cliente (ej. <code>FC-8K2M</code>) → arrastra ahí las fotos en tamaño completo.</p>
+      <p>En cuanto subas las fotos, la galería aparece automáticamente para ese código — no necesitas ningún paso extra.</p>
+    </div>
+    <a href="https://supabase.com/dashboard" target="_blank" class="btn-primary" style="margin-top:8px; display:inline-block; text-decoration:none;">Abrir mi dashboard de Supabase</a>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
