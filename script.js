@@ -61,7 +61,7 @@ function renderFeatured(){
     <div class="paquete-card ${p.featured ? 'featured' : ''}">
       ${p.featured ? '<span class="ribbon">Más elegido</span>' : ''}
       <h3>${p.name}</h3>
-      <div class="paquete-price"><span class="desde">Desde</span>${p.price} MXN</div>
+      <!--<div class="paquete-price"><span class="desde">Desde</span>${p.price} MXN</div>-->
       <ul class="lista-detalles">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
       <button class="btn-choose" onclick="choosePackage('${p.id}')">Elegir ${p.name}</button>
     </div>
@@ -73,7 +73,7 @@ function renderMore(){
   wrap.innerHTML = MORE.map(p => `
     <div class="paquete-card compact">
       <h3>${p.name}</h3>
-      <div class="paquete-price"><span class="desde">Desde</span>${p.price} MXN</div>
+      <!--<div class="paquete-price"><span class="desde">Desde</span>${p.price} MXN</div>-->
       <ul class="lista-detalles">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
       <button class="btn-choose" onclick="choosePackage('${p.id}')">Elegir ${p.name}</button>
     </div>
@@ -96,7 +96,7 @@ document.getElementById('toggleMoreBtn').addEventListener('click', () => {
 });
 
 const select = document.getElementById('bPackage');
-select.innerHTML = ALL_PACKAGES.map(p => `<option value="${p.id}">${p.name} — Desde ${p.price} MXN</option>`).join('');
+select.innerHTML = ALL_PACKAGES.map(p => `<option value="${p.id}">${p.name} <!-- — Desde ${p.price} MXN</option>-->`).join('');
 select.innerHTML += `<option value="otro">Otro / Sesión personalizada</option>`;
 
 // ---------- ESPECIALIDADES: carrusel centrado ----------
@@ -330,7 +330,7 @@ async function accessGallery(){
   sheet.innerHTML = images.map((url, i) => `
     <div class="cell" onclick="openLightbox('${url.replace(/'/g,"\\'")}')">
       <img src="${url}" alt="Foto ${i+1} de la sesión" loading="lazy">
-      <button type="button" class="cell-download" onclick="event.stopPropagation(); downloadImage('${url.replace(/'/g,"\\'")}','${code}-foto-${i+1}.jpg')" title="Descargar en tamaño completo">⭳</button>
+      <button type="button" class="cell-download" onclick="event.stopPropagation(); downloadImage('${url.replace(/'/g,"\\'")}','${code}-foto-${i+1}.jpg')" title="Descargar en tamaño completo"><i class="fa-solid fa-download"></i></button>
     </div>
   `).join('');
 }
