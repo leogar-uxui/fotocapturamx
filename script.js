@@ -96,7 +96,9 @@ document.getElementById('toggleMoreBtn').addEventListener('click', () => {
 });
 
 const select = document.getElementById('bPackage');
-select.innerHTML = ALL_PACKAGES.map(p => `<option value="${p.id}">${p.name} <!-- — Desde ${p.price} MXN</option>-->`).join('');
+// Versión original con precio (comentada correctamente, con // porque esto es JavaScript, no HTML):
+// select.innerHTML = ALL_PACKAGES.map(p => `<option value="${p.id}">${p.name} — Desde ${p.price} MXN</option>`).join('');
+select.innerHTML = ALL_PACKAGES.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
 select.innerHTML += `<option value="otro">Otro / Sesión personalizada</option>`;
 
 // ---------- ESPECIALIDADES: carrusel centrado ----------
@@ -312,6 +314,33 @@ async function accessGallery(){
   }
 
   const paths = validFiles.map(f => `${code}/${f.name}`);
+
+  // Si el fotógrafo subió un .zip con toda la sesión, mostramos un solo botón de descarga
+  // en vez de la cuadrícula de fotos (mucho más ligero para sesiones grandes).
+  const zipFile = validFiles.find(f => f.name.toLowerCase().endsWith('.zip'));
+  if(zipFile){
+    const zipPath = `${code}/${zipFile.name}`;
+    const { data: zipSigned, error: zipSignError } = await supabaseClient.storage.from('client-photos').createSignedUrl(zipPath, 3600);
+    if(zipSignError || !zipSigned){
+      resultBox.innerHTML = `<div class="empty-state">Tu galería está lista, pero hubo un problema generando el enlace de descarga. Intenta de nuevo en un momento.</div>`;
+      return;
+    }
+    resultBox.innerHTML = `
+      <div class="gr-head">
+        <h4>Galería de ${booking ? booking.name : code}</h4>
+        <span>código ${code}</span>
+      </div>
+      <div class="zip-ready">
+        <i class="fa-solid fa-circle-check"></i>
+        <p>¡Tu sesión está lista! Descarga aquí todas tus fotos en tamaño completo, en una sola carpeta comprimida.</p>
+        <button type="button" class="btn-primary" onclick="downloadImage('${zipSigned.signedUrl.replace(/'/g,"\\'")}','${code}-galeria-completa.zip')">
+          <i class="fa-solid fa-file-zipper"></i> Descargar galería completa (.zip)
+        </button>
+      </div>
+    `;
+    return;
+  }
+
   const { data: signedUrls, error: signError } = await supabaseClient.storage.from('client-photos').createSignedUrls(paths, 3600);
   if(signError || !signedUrls){
     resultBox.innerHTML = `<div class="empty-state">Tus fotos están listas, pero hubo un problema generando los enlaces. Intenta de nuevo en un momento.</div>`;
